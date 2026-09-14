@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote Task Portal - Global Digital Evaluation & Task Distribution</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+        }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--light); color: var(--dark); margin: 0; line-height: 1.6; }
+        .hero-section { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 60px 20px; text-align: center; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        .badge { background: rgba(37, 99, 235, 0.2); color: #60a5fa; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; display: inline-block; margin-bottom: 20px; border: 1px solid rgba(96, 165, 250, 0.3); }
+        h1 { font-size: 2.4rem; margin-bottom: 15px; font-weight: 800; letter-spacing: -0.025em; }
+        p.hero-desc { font-size: 1.1rem; color: #94a3b8; max-width: 650px; margin: 0 auto 35px auto; }
+        
+        .cta-box { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); max-width: 480px; margin: 0 auto; text-align: left; color: var(--dark); border: 1px solid var(--border); }
+        .cta-box h3 { margin-top: 0; font-size: 1.2rem; color: var(--dark); margin-bottom: 8px; }
+        .cta-box p { font-size: 13px; color: var(--gray); margin-bottom: 20px; }
+        input[type="email"] { width: 100%; padding: 14px 16px; margin-bottom: 15px; border: 2px solid var(--border); border-radius: 8px; box-sizing: border-box; font-size: 15px; transition: border-color 0.2s; }
+        input[type="email"]:focus { border-color: var(--primary); outline: none; }
+        button.btn-main { background: var(--primary); color: white; border: none; padding: 14px 20px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 15px; transition: background 0.2s; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        button.btn-main:hover { background: var(--primary-dark); }
+
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        .feature-card { background: white; padding: 25px; border-radius: 12px; border: 1px solid var(--border); text-align: left; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+        .feature-card h4 { margin-top: 0; margin-bottom: 8px; color: var(--dark); font-size: 1.05rem; }
+        .feature-card p { font-size: 13.5px; color: var(--gray); margin: 0; }
+        
+        .community-section { max-width: 900px; margin: 60px auto; padding: 0 20px; }
+        .community-header { text-align: center; margin-bottom: 35px; }
+        .community-header h3 { font-size: 1.6rem; color: var(--dark); margin-bottom: 8px; }
+        .community-header p { color: var(--gray); font-size: 14px; }
+        
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; }
+        .review-card { background: white; border: 1px solid var(--border); padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between; }
+        .review-user { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .flag { font-size: 22px; }
+        .review-user strong { font-size: 14px; color: var(--dark); display: block; }
+        .review-user small { font-size: 11.5px; color: var(--gray); }
+        .review-text { font-size: 13px; color: #334155; line-height: 1.5; margin-bottom: 15px; }
+        .review-footer { font-size: 11.5px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 10px; }
+        
+        .trust-banner { text-align: center; padding: 30px 20px; color: var(--gray); font-size: 13px; border-top: 1px solid var(--border); margin-top: 60px; background: white; }
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        <div class="container">
+            <span class="badge">🌐 Global Contributor Network Active</span>
+            <h1>Digital Task & Session Evaluation Portal</h1>
+            <p class="hero-desc">Secure remote infrastructure for mobile application testing, market research validation, and protocol verification.</p>
+            
+            <div class="cta-box">
+                <h3>Initialize Work Session</h3>
+                <p>Enter your active email address to access your assigned task dashboard.</p>
+                <!-- Mengarahkan ke dashboard.html dengan membawa parameter email -->
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <input type="email" id="userEmailInput" placeholder="name@domain.com" required>
+                    <button type="submit" class="btn-main">Access Dashboard &rarr;</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <h4>⚡ Flexible Global Tasks</h4>
+            <p>Execute digital evaluations from any device globally without strict scheduling constraints.</p>
+        </div>
+        <div class="feature-card">
+            <h4>📊 Real-Time Synchronization</h4>
+            <p>Automated verification pipelines instantly update balance ledgers upon compliance completion.</p>
+        </div>
+        <div class="feature-card">
+            <h4>🔒 Encrypted Protocols</h4>
+            <p>Protected session tracking ensures strict accuracy and data integrity across all nodes.</p>
+        </div>
+    </div>
+
+    <div class="community-section">
+        <div class="community-header">
+            <h3>Global Contributor Reviews & Discussions</h3>
+            <p>Verified feedback from <strong>3,420+ active remote workers</strong> worldwide.</p>
+        </div>
+
+        <div class="reviews-grid" id="reviewsContainer">
+            <div class="review-card">
+                <div class="review-user">
+                    <span class="flag">🇺🇸</span>
+                    <div>
+                        <strong>Michael Vance</strong>
+                        <small>New York, USA • Payout Completed</small>
+                    </div>
+                </div>
+                <p class="review-text">"Was skeptical at first because of the $50 threshold, but after completing a mobile app evaluation, the withdraw button unlocked smoothly. Solid platform!"</p>
+                <div class="review-footer"><span>⭐ 5.0 • Yesterday</span></div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-user">
+                    <span class="flag">🇬🇧</span>
+                    <div>
+                        <strong>Oliver Davies</strong>
+                        <small>London, UK • Payout Completed</small>
+                    </div>
+                </div>
+                <p class="review-text">"Clean interface and straightforward protocols. Took two days of spare time to hit target, everything worked as advertised."</p>
+                <div class="review-footer"><span>⭐ 4.9 • 3 days ago</span></div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-user">
+                    <span class="flag">🇨🇭</span>
+                    <div>
+                        <strong>Lukas Meier</strong>
+                        <small>Zürich, Switzerland • Active Tester</small>
+                    </div>
+                </div>
+                <p class="review-text">"Ausgezeichnete Plattform für digitale Aufgaben. Die Angebote funktionieren einwandfrei je nach Gerät."</p>
+                <small style="color: var(--gray); font-size: 11px; display: block; margin-bottom: 10px;">*(Translation: Excellent platform for digital tasks. Offers work seamlessly.)*</small>
+                <div class="review-footer"><span>⭐ 5.0 • 5 days ago</span></div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button id="loadMoreBtn" onclick="loadMoreReviews()" style="background: white; color: var(--primary); border: 2px solid var(--primary); padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">
+                Load More Reviews (Showing 3 of 3,420)
+            </button>
+        </div>
+    </div>
+
+    <div class="trust-banner">
+        &copy; 2026 Remote Task Portal. All rights reserved. Secure server nodes running 24/7.
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('userEmailInput').value;
+            window.location.href = 'dashboard.html?user_email=' + encodeURIComponent(email);
+        }
+
+        function loadMoreReviews() {
+            const container = document.getElementById('reviewsContainer');
+            const btn = document.getElementById('loadMoreBtn');
+            
+            const extraReviews = [
+                { flag: "🇨🇦", name: "Jessica Taylor", location: "Toronto, Canada", status: "Payout Completed", text: "Great experience overall. The task tracking system updates instantly after completion.", time: "1 week ago", sub: "" },
+                { flag: "🇫🇷", name: "Antoine Bernard", location: "Paris, France", status: "Active Tester", text: "Interface très propre et professionnelle. Les missions sont rapides.", time: "2 weeks ago", sub: "*(Translation: Very clean and professional interface.)*" },
+                { flag: "🇮🇩", name: "Dimas Prasetyo", location: "Jakarta, Indonesia", status: "Payout Completed", text: "Awalnya ragu, tapi setelah capai target $50 tombol withdraw beneran kebuka dan diproses.", time: "2 weeks ago", sub: "" }
+            ];
+
+            extraReviews.forEach(rev => {
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                card.innerHTML = `
+                    <div class="review-user">
+                        <span class="flag">${rev.flag}</span>
+                        <div>
+                            <strong>${rev.name}</strong>
+                            <small>${rev.location} • ${rev.status}</small>
+                        </div>
+                    </div>
+                    <p class="review-text">"${rev.text}"</p>
+                    ${rev.sub ? `<small style="color: var(--gray); font-size: 11px; display: block; margin-bottom: 10px;">${rev.sub}</small>` : ''}
+                    <div class="review-footer"><span>⭐ 4.9 • ${rev.time}</span></div>
+                `;
+                container.appendChild(card);
+            });
+
+            btn.innerText = "All Verified Reviews Loaded (3,420)";
+            btn.disabled = true;
+            btn.style.opacity = "0.6";
+            btn.style.cursor = "default";
+        }
+    </script>
+</body>
+</html>

