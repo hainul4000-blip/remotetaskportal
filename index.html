@@ -1,199 +1,279 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remote Task Portal - Global Digital Evaluation & Task Distribution</title>
-    <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --success: #10b981;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --border: #e2e8f0;
-        }
-        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--light); color: var(--dark); margin: 0; line-height: 1.6; }
-        .hero-section { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 60px 20px; text-align: center; }
-        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-        .badge { background: rgba(37, 99, 235, 0.2); color: #60a5fa; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; display: inline-block; margin-bottom: 20px; border: 1px solid rgba(96, 165, 250, 0.3); }
-        h1 { font-size: 2.4rem; margin-bottom: 15px; font-weight: 800; letter-spacing: -0.025em; }
-        p.hero-desc { font-size: 1.1rem; color: #94a3b8; max-width: 650px; margin: 0 auto 35px auto; }
-        
-        .cta-box { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); max-width: 480px; margin: 0 auto; text-align: left; color: var(--dark); border: 1px solid var(--border); }
-        .cta-box h3 { margin-top: 0; font-size: 1.2rem; color: var(--dark); margin-bottom: 8px; }
-        .cta-box p { font-size: 13px; color: var(--gray); margin-bottom: 20px; }
-        input[type="email"] { width: 100%; padding: 14px 16px; margin-bottom: 15px; border: 2px solid var(--border); border-radius: 8px; box-sizing: border-box; font-size: 15px; transition: border-color 0.2s; }
-        input[type="email"]:focus { border-color: var(--primary); outline: none; }
-        button.btn-main { background: var(--primary); color: white; border: none; padding: 14px 20px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 15px; transition: background 0.2s; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
-        button.btn-main:hover { background: var(--primary-dark); }
-
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 900px; margin: 50px auto; padding: 0 20px; }
-        .feature-card { background: white; padding: 25px; border-radius: 12px; border: 1px solid var(--border); text-align: left; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-        .feature-card h4 { margin-top: 0; margin-bottom: 8px; color: var(--dark); font-size: 1.05rem; }
-        .feature-card p { font-size: 13.5px; color: var(--gray); margin: 0; }
-        
-        .community-section { max-width: 900px; margin: 60px auto; padding: 0 20px; }
-        .community-header { text-align: center; margin-bottom: 35px; }
-        .community-header h3 { font-size: 1.6rem; color: var(--dark); margin-bottom: 8px; }
-        .community-header p { color: var(--gray); font-size: 14px; }
-        
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; }
-        .review-card { background: white; border: 1px solid var(--border); padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between; }
-        .review-user { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .flag { font-size: 22px; }
-        .review-user strong { font-size: 14px; color: var(--dark); display: block; }
-        .review-user small { font-size: 11.5px; color: var(--gray); }
-        .review-text { font-size: 13px; color: #334155; line-height: 1.5; margin-bottom: 15px; }
-        .review-footer { font-size: 11.5px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 10px; }
-        
-        .trust-banner { text-align: center; padding: 30px 20px; color: var(--gray); font-size: 13px; border-top: 1px solid var(--border); margin-top: 60px; background: white; }
-    </style>
-</head>
-<body>
-
-    <div class="hero-section">
-        <div class="container">
-            <span class="badge">🌐 Global Contributor Network Active</span>
-            <h1>Digital Task & Session Evaluation Portal</h1>
-            <p class="hero-desc">Secure remote infrastructure for mobile application testing, market research validation, and protocol verification.</p>
-            
-            <div class="cta-box">
-                <h3>Initialize Work Session</h3>
-                <p>Enter your active email address to access your assigned task dashboard.</p>
-                <form id="loginForm" onsubmit="handleLogin(event)">
-                    <input type="email" id="userEmailInput" placeholder="name@domain.com" required>
-                    <button type="submit" class="btn-main">Access Dashboard &rarr;</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="features-grid">
-        <div class="feature-card">
-            <h4>⚡ Flexible Global Tasks</h4>
-            <p>Execute digital evaluations from any device globally without strict scheduling constraints.</p>
-        </div>
-        <div class="feature-card">
-            <h4>📊 Real-Time Synchronization</h4>
-            <p>Automated verification pipelines instantly update balance ledgers upon compliance completion.</p>
-        </div>
-        <div class="feature-card">
-            <h4>🔒 Encrypted Protocols</h4>
-            <p>Protected session tracking ensures strict accuracy and data integrity across all nodes.</p>
-        </div>
-    </div>
-
-    <div class="community-section">
-        <div class="community-header">
-            <h3>Global Contributor Reviews & Discussions</h3>
-            <p>Verified feedback from <strong>3,420+ active remote workers</strong> worldwide.</p>
-        </div>
-
-        <div class="reviews-grid" id="reviewsContainer">
-            <div class="review-card">
-                <div class="review-user">
-                    <span class="flag">🇺🇸</span>
-                    <div>
-                        <strong>Michael Vance</strong>
-                        <small>New York, USA • Payout Completed</small>
-                    </div>
-                </div>
-                <p class="review-text">"Was skeptical at first because of the $50 threshold, but after completing a mobile app evaluation, the withdraw button unlocked smoothly. Solid platform!"</p>
-                <div class="review-footer"><span>⭐ 5.0 • Yesterday</span></div>
-            </div>
-
-            <div class="review-card">
-                <div class="review-user">
-                    <span class="flag">🇬🇧</span>
-                    <div>
-                        <strong>Oliver Davies</strong>
-                        <small>London, UK • Payout Completed</small>
-                    </div>
-                </div>
-                <p class="review-text">"Clean interface and straightforward protocols. Took two days of spare time to hit target, everything worked as advertised."</p>
-                <div class="review-footer"><span>⭐ 4.9 • 3 days ago</span></div>
-            </div>
-
-            <div class="review-card">
-                <div class="review-user">
-                    <span class="flag">🇨🇭</span>
-                    <div>
-                        <strong>Lukas Meier</strong>
-                        <small>Zürich, Switzerland • Active Tester</small>
-                    </div>
-                </div>
-                <p class="review-text">"Ausgezeichnete Plattform für digitale Aufgaben. Die Angebote funktionieren einwandfrei je nach Gerät."</p>
-                <small style="color: var(--gray); font-size: 11px; display: block; margin-bottom: 10px;">*(Translation: Excellent platform for digital tasks. Offers work seamlessly.)*</small>
-                <div class="review-footer"><span>⭐ 5.0 • 5 days ago</span></div>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 30px;">
-            <button id="loadMoreBtn" onclick="loadMoreReviews()" style="background: white; color: var(--primary); border: 2px solid var(--primary); padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">
-                Load More Reviews (Showing 3 of 3,420)
-            </button>
-        </div>
-    </div>
-
-    <div class="trust-banner">
-        &copy; 2026 Remote Task Portal. All rights reserved. Secure server nodes running 24/7.
-    </div>
-
+    <title>Global Remote Task Portal | AI Data Training & Micro-Tasking</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        function handleLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('userEmailInput').value;
-            window.location.href = 'dashboard.html?user_email=' + encodeURIComponent(email);
-        }
-
-        function loadMoreReviews() {
-            const container = document.getElementById('reviewsContainer');
-            const btn = document.getElementById('loadMoreBtn');
-            
-            const extraReviews = [
-                { flag: "🇨🇦", name: "Jessica Taylor", location: "Toronto, Canada", status: "Payout Completed", text: "Great experience overall. The task tracking system updates instantly after completion.", time: "1 week ago", sub: "" },
-                { flag: "🇫🇷", name: "Antoine Bernard", location: "Paris, France", status: "Active Tester", text: "Interface très propre et professionnelle. Les missions sont rapides.", time: "2 weeks ago", sub: "*(Translation: Very clean and professional interface.)*" },
-                { flag: "🇮🇩", name: "Dimas Prasetyo", location: "Jakarta, Indonesia", status: "Payout Completed", text: "Awalnya ragu, tapi setelah capai target $50 tombol withdraw beneran kebuka dan diproses.", time: "2 weeks ago", sub: "" }
-            ];
-
-            extraReviews.forEach(rev => {
-                const card = document.createElement('div');
-                card.className = 'review-card';
-                card.innerHTML = `
-                    <div class="review-user">
-                        <span class="flag">${rev.flag}</span>
-                        <div>
-                            <strong>${rev.name}</strong>
-                            <small>${rev.location} • ${rev.status}</small>
-                        </div>
-                    </div>
-                    <p class="review-text">"${rev.text}"</p>
-                    ${rev.sub ? `<small style="color: var(--gray); font-size: 11px; display: block; margin-bottom: 10px;">${rev.sub}</small>` : ''}
-                    <div class="review-footer"><span>⭐ 4.9 • ${rev.time}</span></div>
-                `;
-                container.appendChild(card);
-            });
-
-            btn.innerText = "All Verified Reviews Loaded (3,420)";
-            btn.disabled = true;
-            btn.style.opacity = "0.6";
-            btn.style.cursor = "default";
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#070913',
+                        cardbg: '#0e1326',
+                        accent: '#38bdf8',
+                        accentglow: '#0284c7'
+                    }
+                }
+            }
         }
     </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #070913; color: #f8fafc; }
+        .glow-box { box-shadow: 0 0 25px rgba(56, 189, 248, 0.15); }
+        .glow-btn { box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-accent selection:text-darkbg">
 
-    <!-- Histats.com START (aync) -->
-    <script type="text/javascript">var _Hasync= _Hasync|| [];
-    _Hasync.push(['Histats.start', '1,5051899,4,0,0,0,00010000']);
-    _Hasync.push(['Histats.fasi', '1']);
-    _Hasync.push(['Histats.track_hits', '']);
-    (function() {
-    var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-    hs.src = ('//s10.histats.com/js15_as.js');
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-    })();</script>
-    <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5051899&101" alt="" border="0"></a></noscript>
-    <!-- Histats.com END -->
+    <!-- TOP HEADER / TRUST BAR -->
+    <header class="border-b border-slate-800 bg-darkbg/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center glow-box">
+                    <i class="fa-solid fa-network-wired text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-wide bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">GLOBAL REMOTE TASK PORTAL</span>
+                    <span class="block text-[10px] text-cyan-400 font-medium tracking-widest uppercase">AI Training & Evaluation Network</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="hidden sm:flex items-center space-x-2 bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-full text-xs text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="geo-node">Node: US-East (Secure)</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER (SPA VIEWS) -->
+    <main class="flex-grow flex items-center justify-center px-4 py-8">
+
+        <!-- VIEW 1: LANDING PAGE -->
+        <div id="view-landing" class="w-full max-w-4xl text-center space-y-8 animate-fadeIn">
+            <div class="inline-flex items-center space-x-2 bg-cyan-950/60 border border-cyan-800/50 px-4 py-1.5 rounded-full text-cyan-300 text-xs font-semibold">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Official Q3 2026 AI Training Cohort Open</span>
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+                Scale AI Models. <br><span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Get Paid for Micro-Tasks.</span>
+            </h1>
+            
+            <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
+                Join thousands of remote evaluators across North America & Europe. Complete data annotation, prompt testing, and content moderation tasks directly from your mobile device.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
+                <button onclick="switchView('view-onboarding')" class="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-darkbg font-bold px-8 py-4 rounded-xl glow-btn transition-all transform hover:-translate-y-0.5">
+                    Apply as Remote Evaluator <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+
+            <!-- LIVE STATS TICKER -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-8 max-w-3xl mx-auto border-t border-slate-800/80 text-left">
+                <div class="bg-cardbg/50 border border-slate-800/60 p-4 rounded-xl">
+                    <div class="text-slate-400 text-xs">Active Task Pool</div>
+                    <div class="text-xl font-bold text-cyan-400 mt-1">1,429 Batches</div>
+                </div>
+                <div class="bg-cardbg/50 border border-slate-800/60 p-4 rounded-xl">
+                    <div class="text-slate-400 text-xs">Avg. Hourly Rate</div>
+                    <div class="text-xl font-bold text-emerald-400 mt-1">$18.50 - $24.00</div>
+                </div>
+                <div class="col-span-2 sm:col-span-1 bg-cardbg/50 border border-slate-800/60 p-4 rounded-xl">
+                    <div class="text-slate-400 text-xs">Payout Frequency</div>
+                    <div class="text-xl font-bold text-purple-400 mt-1">Daily / Instant</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2: ONBOARDING / PROFILE SETUP -->
+        <div id="view-onboarding" class="w-full max-w-xl bg-cardbg border border-slate-800 p-6 sm:p-8 rounded-2xl shadow-2xl hidden space-y-6">
+            <div>
+                <span class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Step 1 of 2</span>
+                <h2 class="text-2xl font-bold mt-1">Configure Worker Profile</h2>
+                <p class="text-slate-400 text-sm mt-1">Select your task preferences to match with high-priority enterprise queues.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1">Select Primary Region</label>
+                    <select id="user-region" class="w-full bg-darkbg border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500">
+                        <option value="US">United States (US-East / US-West)</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="CA">Canada</option>
+                        <option value="OTHER">Global / Other Region</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1">Preferred Task Category</label>
+                    <select class="w-full bg-darkbg border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500">
+                        <option>AI Prompt Safety & Logic Evaluation</option>
+                        <option>Multilingual Data Transcription</option>
+                        <option>UI/UX Layout Annotation</option>
+                        <option>General Micro-Tasking</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1">Device Environment</label>
+                    <div class="p-3 bg-darkbg border border-slate-700 rounded-xl text-sm text-slate-300 flex items-center justify-between">
+                        <span><i class="fa-solid fa-mobile-screen text-cyan-400 mr-2"></i> Smartphone Terminal Mode</span>
+                        <span class="text-xs bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-800">Compatible</span>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="startVerificationProcess()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-darkbg font-bold py-3.5 rounded-xl glow-btn transition-all">
+                Submit Profile & Initialize <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+
+        <!-- VIEW 3: LOADING / SECURITY VERIFICATION SCREEN -->
+        <div id="view-loading" class="w-full max-w-md bg-cardbg border border-slate-800 p-8 rounded-2xl shadow-2xl hidden text-center space-y-6">
+            <div class="relative w-20 h-20 mx-auto">
+                <div class="absolute inset-0 rounded-full border-4 border-slate-800"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-cyan-500 border-t-transparent animate-spin"></div>
+                <div class="absolute inset-0 flex items-center justify-center text-cyan-400">
+                    <i class="fa-solid fa-shield-checker text-xl"></i>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold">Verifying Worker Credentials</h3>
+                <p id="loading-status-text" class="text-xs text-slate-400 mt-2">Connecting to regional server node...</p>
+            </div>
+
+            <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-slate-800">
+                <div id="loading-bar" class="bg-gradient-to-r from-cyan-500 to-blue-500 h-full w-0 transition-all duration-500"></div>
+            </div>
+        </div>
+
+        <!-- VIEW 4: TASK DASHBOARD (GATEWAY TO CONTENT LOCKER) -->
+        <div id="view-dashboard" class="w-full max-w-3xl space-y-6 hidden">
+            <div class="bg-cardbg border border-slate-800 p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="text-xs text-emerald-400 font-semibold tracking-wide">STATUS: PENDING SECURITY DISPATCH</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mt-1">Task Dispatch Center</h2>
+                </div>
+                <div class="bg-darkbg border border-slate-700 px-4 py-2 rounded-xl text-right">
+                    <span class="text-xs text-slate-400 block">Assigned Tier</span>
+                    <span class="text-sm font-bold text-cyan-400">Tier-1 US Evaluator</span>
+                </div>
+            </div>
+
+            <!-- SECURITY WARNING BANNER -->
+            <div class="bg-amber-950/30 border border-amber-600/40 p-4 rounded-xl flex items-start space-x-3 text-amber-200 text-xs sm:text-sm">
+                <i class="fa-solid fa-triangle-exclamation text-amber-400 text-lg mt-0.5"></i>
+                <div>
+                    <span class="font-bold block">Regional Verification Required</span>
+                    Due to automated bot prevention policies for high-paying task queues, a one-time regional identity confirmation must be completed before dispatching tasks to your browser session.
+                </div>
+            </div>
+
+            <!-- TASK CARDS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-cardbg border border-slate-800 p-5 rounded-xl space-y-3">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs bg-cyan-950 text-cyan-400 px-2.5 py-1 rounded-md border border-cyan-800/60 font-semibold">AI Prompt Review</span>
+                        <span class="text-emerald-400 font-bold text-sm">$22.00 / hr</span>
+                    </div>
+                    <h4 class="font-semibold text-slate-200">Evaluate LLM Response Accuracy</h4>
+                    <p class="text-xs text-slate-400">Review conversational AI outputs for safety, tone, and logical consistency.</p>
+                    <button onclick="triggerContentLocker()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-darkbg font-bold py-2.5 rounded-lg text-xs transition-all">
+                        Claim Task Slot <i class="fa-solid fa-lock ml-1"></i>
+                    </button>
+                </div>
+
+                <div class="bg-cardbg border border-slate-800 p-5 rounded-xl space-y-3">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs bg-blue-950 text-blue-400 px-2.5 py-1 rounded-md border border-blue-800/60 font-semibold">Data Annotation</span>
+                        <span class="text-emerald-400 font-bold text-sm">$19.50 / hr</span>
+                    </div>
+                    <h4 class="font-semibold text-slate-200">Image & Bounding Box Tagging</h4>
+                    <p class="text-xs text-slate-400">Classify visual training samples for autonomous navigation models.</p>
+                    <button onclick="triggerContentLocker()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-darkbg font-bold py-2.5 rounded-lg text-xs transition-all">
+                        Claim Task Slot <i class="fa-solid fa-lock ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-y-2">
+        <div class="flex justify-center space-x-6">
+            <a href="#" class="hover:text-slate-300">Privacy Policy</a>
+            <a href="#" class="hover:text-slate-300">Terms of Service</a>
+            <a href="#" class="hover:text-slate-300">Compliance & Security</a>
+            <a href="#" class="hover:text-slate-300">Worker Helpdesk</a>
+        </div>
+        <p>&copy; 2026 Global Remote Task Portal. All rights reserved. Operating under international remote labor compliance standards.</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC FOR SPA TRANSITIONS -->
+    <script>
+        function switchView(viewId) {
+            document.getElementById('view-landing').classList.add('hidden');
+            document.getElementById('view-onboarding').classList.add('hidden');
+            document.getElementById('view-loading').classList.add('hidden');
+            document.getElementById('view-dashboard').classList.add('hidden');
+            
+            document.getElementById(viewId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startVerificationProcess() {
+            switchView('view-loading');
+            
+            const statusText = document.getElementById('loading-status-text');
+            const loadingBar = document.getElementById('loading-bar');
+            
+            setTimeout(() => {
+                statusText.innerText = "Verifying regional IP stability (US-East)...";
+                loadingBar.style.width = "40%";
+            }, 1000);
+
+            setTimeout(() => {
+                statusText.innerText = "Checking task queue eligibility...";
+                loadingBar.style.width = "80%";
+            }, 2300);
+
+            setTimeout(() => {
+                statusText.innerText = "Profile successfully authenticated!";
+                loadingBar.style.width = "100%";
+            }, 3500);
+
+            setTimeout(() => {
+                switchView('view-dashboard');
+            }, 4200);
+        }
+
+        function triggerContentLocker() {
+            // ==========================================
+            // TEMPATKAN SCRIPT CONTENT LOCKER ADBLUEMEDIA ANDA DI SINI
+            // Contoh: 
+            // window.location.href = "URL_SMARTLINK_ATAU_LOCKER_ANDA";
+            // Atau panggil fungsi locker bawaan AdBlueMedia jika menggunakan script embed.
+            // ==========================================
+            alert("Security Verification Required: Opening secure verification gateway...");
+            
+            // CONTOH REDIRECT ATAU PEMANGGILAN SCRIPT:
+            // _ab(xxxx); 
+        }
+    </script>
 </body>
 </html>
