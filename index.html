@@ -80,19 +80,18 @@
             </p>
 
             <div class="flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
-                <!-- Tombol Berkelanjutan Menggunakan Alur Pengecekan Soft Warning -->
                 <button onclick="handleInitialAction()" class="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-darkbg font-bold px-8 py-4 rounded-xl glow-btn transition-all transform hover:-translate-y-0.5 cursor-pointer">
                     Apply as Remote Evaluator <i class="fa-solid fa-arrow-right ml-2"></i>
                 </button>
             </div>
 
-            <!-- Badge Urgensi Slot Terbatas (Meningkatkan Konversi) -->
+            <!-- Urgency Badge -->
             <div class="max-w-md mx-auto p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl flex items-center justify-between text-xs text-amber-300">
                 <div class="flex items-center gap-2">
                     <span class="animate-pulse">🔥</span>
-                    <span>Kuota Sesi Regional Hari Ini:</span>
+                    <span>Regional Daily Slot Availability:</span>
                 </div>
-                <span class="font-bold bg-amber-500 text-slate-950 px-2 py-0.5 rounded-md">3 Slot Tersisa</span>
+                <span class="font-bold bg-amber-500 text-slate-950 px-2 py-0.5 rounded-md">3 Slots Left</span>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 max-w-3xl mx-auto border-t border-slate-800/80 text-left">
@@ -110,23 +109,23 @@
                 </div>
             </div>
 
-            <!-- FAQ Section Ringkas -->
+            <!-- FAQ Section (Fully English) -->
             <div class="mt-8 pt-6 border-t border-slate-800 text-left max-w-3xl mx-auto">
                 <h4 class="text-xs font-bold text-slate-400 mb-3 uppercase tracking-wider">Frequently Asked Questions</h4>
                 <div class="space-y-3 text-xs">
                     <details class="group bg-cardbg/50 p-3 rounded-lg border border-slate-800">
                         <summary class="font-medium text-slate-200 cursor-pointer list-none flex justify-between items-center">
-                            <span>Apakah proses pendaftaran ini gratis?</span>
+                            <span>Is the application process free of charge?</span>
                             <span class="group-open:rotate-180 transition-transform">▼</span>
                         </summary>
-                        <p class="mt-2 text-slate-400 leading-relaxed">Ya, seluruh proses validasi dan alokasi tugas sepenuhnya gratis tanpa dipungut biaya.</p>
+                        <p class="mt-2 text-slate-400 leading-relaxed">Yes, the entire validation and task allocation process is 100% free with zero hidden fees.</p>
                     </details>
                     <details class="group bg-cardbg/50 p-3 rounded-lg border border-slate-800">
                         <summary class="font-medium text-slate-200 cursor-pointer list-none flex justify-between items-center">
-                            <span>Berapa lama proses verifikasi tugas?</span>
+                            <span>How long does the task verification take?</span>
                             <span class="group-open:rotate-180 transition-transform">▼</span>
                         </summary>
-                        <p class="mt-2 text-slate-400 leading-relaxed">Verifikasi berjalan otomatis setelah Anda menyelesaikan langkah pengamanan sistem yang diminta.</p>
+                        <p class="mt-2 text-slate-400 leading-relaxed">Verification completes automatically right after you finish the required security step.</p>
                     </details>
                 </div>
             </div>
@@ -248,7 +247,7 @@
 
     </main>
 
-    <!-- MODAL 1: Peringatan Lembut (Bisa Ditutup / Soft Warning) -->
+    <!-- SOFT WARNING MODAL -->
     <div id="soft-warning-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
         <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 text-center shadow-2xl">
             <div class="text-amber-400 text-4xl mb-3">⚠️</div>
@@ -267,13 +266,13 @@
         </div>
     </div>
 
-    <!-- MODAL 2: Hard Block (Wajib untuk Content Locker) -->
+    <!-- HARD BLOCK MODAL -->
     <div id="hard-block-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md">
         <div class="bg-slate-900 border border-red-500/50 rounded-2xl max-w-md w-full p-6 text-center shadow-2xl shadow-red-500/10">
             <div class="text-red-500 text-4xl mb-3">🛑</div>
             <h3 class="text-xl font-bold text-white mb-2">Browser Verification Required</h3>
             <p class="text-sm text-slate-300 leading-relaxed mb-6">
-                The task security verification (*Content Locker*) strictly requires an external web browser (<b class="text-cyan-400">Chrome/Safari</b>). Social media in-app browsers block required background tracking scripts.
+                The task security verification (<b class="text-cyan-400">Content Locker</b>) strictly requires an external web browser (Chrome/Safari). Social media in-app browsers block required background tracking scripts.
                 <br><br>Please copy the link and open it in Chrome to complete your task dispatch.
             </p>
             <button onclick="copyAndOpenChrome()" class="w-full py-3 px-4 bg-red-600 hover:bg-red-500 text-white text-sm font-bold rounded-xl transition shadow-lg shadow-red-600/20 mb-3 cursor-pointer">
@@ -285,7 +284,7 @@
         </div>
     </div>
 
-    <!-- Live Activity Ticker (Pojok Kiri Bawah) -->
+    <!-- Live Activity Ticker -->
     <div id="activity-ticker" class="fixed bottom-4 left-4 z-40 max-w-xs bg-slate-900/90 border border-slate-700/80 backdrop-blur-md rounded-xl p-3 shadow-xl transition-all duration-500 transform translate-y-20 opacity-0">
         <div class="flex items-center gap-3">
             <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></div>
@@ -313,7 +312,6 @@
     <script src="https://d1chbu4sfo2xhu.cloudfront.net/b10f06d.js"></script>
 
     <script>
-        // Deteksi In-App Browser secara komprehensif
         function isInAppBrowser() {
             var ua = navigator.userAgent || navigator.vendor || window.opera;
             return (ua.indexOf('FBAN') > -1) || 
@@ -329,7 +327,6 @@
 
         let softWarningShown = false;
 
-        // Tahap 1: Saat tombol utama ditekan
         function handleInitialAction() {
             if (isInAppBrowser() && !softWarningShown) {
                 softWarningShown = true;
@@ -393,7 +390,6 @@
             }, 4200);
         }
 
-        // Tahap 2: Hard Block pada Content Locker
         function triggerContentLocker() {
             if (isInAppBrowser()) {
                 document.getElementById('hard-block-modal').classList.remove('hidden');
@@ -413,7 +409,6 @@
             }
         }
 
-        // Live Activity Ticker Script
         const activities = [
             { name: "Michael V.", location: "California", task: "AI Prompt Review" },
             { name: "Sarah K.", location: "Texas", task: "Data Annotation" },
