@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cyberpunk VIP Gaming Pass & Code Unlocker Hub</title>
+    
+    <!-- Mandatory AdBlueMedia Script -->
+    <script type="text/javascript">
+        var ePVXU_mjQ_wQKvMc={"it":4631647,"key":"d9479"};
+    </script>
+    <script src="https://d18k3i06xdslhs.cloudfront.net/d34cdce.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#030208',
+                            panel: '#0a071b',
+                            cyan: '#00f3ff',
+                            pink: '#ff0055',
+                            gold: '#f59e0b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Rajdhani', 'sans-serif'],
+                        mono: ['Share Tech Mono', 'monospace']
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3)',
+                        'neon-pink': '0 0 10px rgba(255, 0, 85, 0.5), 0 0 20px rgba(255, 0, 85, 0.3)',
+                        'neon-gold': '0 0 10px rgba(245, 158, 11, 0.5), 0 0 20px rgba(245, 158, 11, 0.3)',
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glitch': 'glitch 2s linear infinite',
+                    },
+                    keyframes: {
+                        glitch: {
+                            '2%, 64%': { transform: 'translate(2px, 0) skew(0deg)' },
+                            '4%, 60%': { transform: 'translate(-2px, 0) skew(0deg)' },
+                            '62%': { transform: 'translate(0, 0) skew(5deg)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #030208;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* Canvas Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(10, 7, 27, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.05);
+        }
+
+        /* Game Card 3D Tilt */
+        .game-card {
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        .game-card:hover {
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+            border-color: rgba(0, 243, 255, 0.8);
+            z-index: 10;
+        }
+
+        /* Scanline Overlay */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.3;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #030208; }
+        ::-webkit-scrollbar-thumb { background: #00f3ff; border-radius: 3px; }
+
+        /* Scratch Card Area */
+        .scratch-container {
+            position: relative;
+            width: 300px;
+            height: 150px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #f59e0b;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+            touch-action: none; /* Prevent scroll on mobile while scratching */
+        }
+        #scratch-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; z-index: 2; cursor: pointer;
+        }
+        .scratch-reward {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a071b 100%);
+        }
+
+        /* Terminal Typer */
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        
+        .hide-step { display: none; }
+    </style>
+</head>
+<body class="antialiased font-sans selection:bg-cyber-pink selection:text-white">
+
+    <!-- Scanline overlay -->
+    <div class="scanlines"></div>
+
+    <!-- WebGL Particle Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Top Scarcity Banner -->
+    <div id="scarcity-banner" class="w-full bg-cyber-pink text-white text-center py-1 text-xs md:text-sm font-bold tracking-wider uppercase z-50 relative animate-pulse-fast">
+        ⚠️ INITIALIZING SECURE CONNECTION...
+    </div>
+
+    <!-- Header -->
+    <header class="glass-panel border-b sticky top-0 z-40 w-full">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-cyber-cyan text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold uppercase tracking-widest text-white">
+                    <span class="text-cyber-cyan">APEX</span> VIP <span class="text-cyber-pink">HUB</span>
+                </h1>
+            </div>
+            <button id="audio-toggle" class="text-gray-400 hover:text-cyber-cyan transition-colors" onclick="toggleAudio()">
+                <i class="fa-solid fa-volume-high text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8 pb-24">
+        
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-5xl font-bold mb-3 uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-white to-cyber-pink">
+                Select Your Access Pass
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                Unlock exclusive VIP credits, cheat engines, and premium accounts. <br class="hidden md:block">Bypass standard restrictions instantly.
+            </p>
+        </div>
+
+        <!-- Game Directory Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6" id="game-grid">
+            <!-- Populated by JS -->
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-panel border-t mt-auto text-center py-8 relative z-10">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-gray-500 text-sm mb-4">
+                freeplaygame.online is an independent promotional directory and is not affiliated with Meta or any third-party game developers.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-xs font-bold text-gray-400 uppercase">
+                <a href="#" class="hover:text-cyber-cyan">Privacy Policy</a>
+                <a href="#" class="hover:text-cyber-cyan">Terms of Service</a>
+                <a href="#" class="hover:text-cyber-cyan">DMCA</a>
+                <a href="https://t.me/RemoteTaskHelp" target="_blank" class="text-cyber-cyan hover:text-white transition-colors">
+                    <i class="fa-brands fa-telegram mr-1"></i> Support
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIVE CHAT WIDGET -->
+    <div class="fixed bottom-4 right-4 z-50">
+        <div class="glass-panel w-64 md:w-80 rounded-t-lg rounded-bl-lg overflow-hidden flex flex-col shadow-neon-cyan border-cyber-cyan/30" id="chat-widget">
+            <div class="bg-cyber-cyan/10 px-3 py-2 border-b border-cyber-cyan/30 flex justify-between items-center cursor-pointer" onclick="toggleChat()">
+                <span class="font-bold text-sm"><i class="fa-solid fa-satellite-dish mr-1 text-cyber-cyan animate-pulse"></i> Live Community</span>
+                <i class="fa-solid fa-chevron-down text-xs" id="chat-icon"></i>
+            </div>
+            <div id="chat-body" class="h-48 overflow-y-auto p-3 flex flex-col gap-2 text-xs font-mono bg-[#05050b]/90">
+                <div class="text-gray-500 text-center text-[10px]">-- SECURE CHANNEL OPENED --</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOCIAL PROOF TOAST -->
+    <div id="toast" class="fixed bottom-4 left-4 z-50 glass-panel border-cyber-pink/50 border rounded p-3 flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i class="fa-solid fa-circle-check text-cyber-pink text-xl"></i>
+        <div>
+            <div class="text-xs text-gray-400" id="toast-time">Just now</div>
+            <div class="text-sm font-bold" id="toast-msg">User_102 unlocked VIP</div>
+        </div>
+    </div>
+
+    <!-- EXIT INTENT MODAL -->
+    <div id="exit-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="glass-panel border-cyber-gold max-w-md w-full p-6 text-center rounded-xl shadow-neon-gold border-2">
+            <i class="fa-solid fa-triangle-exclamation text-5xl text-cyber-gold mb-4 animate-bounce"></i>
+            <h2 class="text-2xl font-bold mb-2">WAIT! DO NOT CLOSE!</h2>
+            <p class="text-gray-300 mb-6">Your VIP Code has been generated and is reserved for your IP for the next <strong class="text-white">60 seconds</strong>. If you leave now, it will be given to the next user.</p>
+            <button onclick="closeExitModal()" class="w-full bg-cyber-gold hover:bg-yellow-500 text-black font-bold py-3 rounded uppercase transition-colors">
+                Return to My Code
+            </button>
+        </div>
+    </div>
+
+    <!-- THE APEX FUNNEL MODAL -->
+    <div id="funnel-modal" class="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-panel border-cyber-cyan max-w-lg w-full rounded-xl overflow-hidden shadow-neon-cyan border relative">
+            
+            <!-- Modal Header -->
+            <div class="bg-cyber-cyan/10 p-4 border-b border-cyber-cyan/30 flex justify-between items-center">
+                <div class="font-bold uppercase tracking-wider text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-microchip text-cyber-cyan"></i> 
+                    <span id="modal-title">Access Terminal</span>
+                </div>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-cyber-pink"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 relative min-h-[300px] flex flex-col justify-center">
+                
+                <!-- STEP 1: ID Input -->
+                <div id="step-1" class="transition-opacity duration-300">
+                    <p class="text-center text-gray-300 text-sm mb-4">Establish connection to <strong class="text-cyber-cyan" id="selected-game">Game</strong> server.</p>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-400 mb-1 uppercase">In-Game ID / Username</label>
+                        <input type="text" id="username-input" placeholder="e.g. Player777" class="w-full bg-[#05050b] border border-cyber-cyan/30 rounded p-3 text-white focus:outline-none focus:border-cyber-cyan font-mono" oninput="playTypeSound()">
+                        <div class="text-right mt-1">
+                            <button class="text-xs text-cyber-cyan hover:underline" onclick="generateGuestID()">Generate Guest ID</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-400 mb-1 uppercase">Select Platform</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button class="platform-btn border border-gray-600 rounded p-2 text-gray-400 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors" onclick="selectPlatform(this, 'iOS')"><i class="fa-brands fa-apple text-xl"></i></button>
+                            <button class="platform-btn border border-gray-600 rounded p-2 text-gray-400 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors" onclick="selectPlatform(this, 'Android')"><i class="fa-brands fa-android text-xl"></i></button>
+                            <button class="platform-btn border border-gray-600 rounded p-2 text-gray-400 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors" onclick="selectPlatform(this, 'PC')"><i class="fa-solid fa-desktop text-xl"></i></button>
+                        </div>
+                    </div>
+                    
+                    <button onclick="nextStep(2)" class="w-full bg-cyber-cyan hover:bg-cyan-400 text-black font-bold py-3 rounded uppercase transition-colors shadow-neon-cyan shadow-md" onmouseenter="playHoverSound()">
+                        Connect & Retrieve Data
+                    </button>
+                </div>
+
+                <!-- STEP 2: Scratch Card -->
+                <div id="step-2" class="hide-step text-center">
+                    <h3 class="text-lg font-bold mb-1 text-cyber-gold animate-pulse">REWARD ALLOCATED!</h3>
+                    <p class="text-xs text-gray-400 mb-4">Rub the silver area below to reveal your prize.</p>
+                    
+                    <div class="scratch-container" id="scratch-container">
+                        <div class="scratch-reward">
+                            <i class="fa-solid fa-crown text-cyber-gold text-3xl mb-1"></i>
+                            <div class="font-bold text-lg text-white">JACKPOT!</div>
+                            <div class="text-sm text-cyber-cyan font-mono">2,500 VIP CREDITS</div>
+                        </div>
+                        <canvas id="scratch-canvas"></canvas>
+                    </div>
+                    <p class="text-[10px] text-gray-500 mt-3 font-mono" id="scratch-percent">0% Unlocked</p>
+                </div>
+
+                <!-- STEP 3: Terminal Sync -->
+                <div id="step-3" class="hide-step">
+                    <div class="bg-[#030208] border border-gray-800 rounded p-4 h-48 overflow-y-hidden font-mono text-xs md:text-sm shadow-inner relative">
+                        <div id="terminal-output" class="text-green-500 whitespace-pre-wrap"></div>
+                        <span class="cursor-blink text-green-500">_</span>
+                    </div>
+                </div>
+
+                <!-- STEP 4 & 5: Code Teaser & Verification -->
+                <div id="step-4" class="hide-step text-center">
+                    <h3 class="text-xl font-bold text-white mb-2">Code Successfully Generated!</h3>
+                    
+                    <!-- Voucher Graphic -->
+                    <div class="bg-gradient-to-r from-gray-900 to-[#0a071b] border-2 border-cyber-cyan rounded-lg p-4 mb-4 relative overflow-hidden shadow-neon-cyan">
+                        <!-- Barcode aesthetic -->
+                        <div class="absolute top-0 right-0 w-8 h-full bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,#fff_2px,#fff_4px)] opacity-10"></div>
+                        
+                        <div class="text-xs text-gray-400 font-bold uppercase mb-1 text-left">Digital VIP Voucher</div>
+                        <div class="font-mono text-2xl md:text-3xl font-bold tracking-widest text-white flex items-center justify-center gap-2">
+                            <span id="voucher-prefix">FK26-9821</span>-<span class="text-cyber-pink relative">
+                                XXXX
+                                <i class="fa-solid fa-lock absolute -top-1 -right-4 text-xs animate-pulse"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center items-center gap-2 text-cyber-pink font-bold font-mono text-lg mb-4">
+                        <i class="fa-regular fa-clock"></i> <span id="countdown">04:59</span>
+                    </div>
+
+                    <p class="text-sm text-gray-300 mb-4">
+                        Complete 1 quick sponsor verification below to instantly unlock the final 4 digits.
+                    </p>
+
+                    <!-- Primary CPA CTA -->
+                    <button onclick="triggerLocker()" class="w-full bg-cyber-pink hover:bg-pink-600 text-white font-bold py-4 rounded uppercase transition-colors shadow-neon-pink shadow-md text-lg flex items-center justify-center gap-2" onmouseenter="playHoverSound()">
+                        <i class="fa-solid fa-unlock-keyhole"></i> Unlock Final 4 Digits
+                    </button>
+                    
+                    <!-- Smart AdBlock Fallback (Hidden by default) -->
+                    <div id="adblock-warning" class="hidden mt-3 p-3 bg-red-900/50 border border-red-500 rounded text-xs text-white">
+                        <i class="fa-solid fa-shield-virus"></i> AdBlock detected! Please pause your AdBlocker or <a href="https://t.me/RemoteTaskHelp" class="underline text-cyber-cyan font-bold" target="_blank">click here for manual unlock</a>.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Mandatory Histats Tracking -->
+    <script type="text/javascript">var _Hasync= _Hasync|| [];
+    _Hasync.push(['Histats.start', '1,5051899,4,0,0,0,00010000']);
+    _Hasync.push(['Histats.fasi', '1']);
+    _Hasync.push(['Histats.track_hits', '']);
+    (function() {
+    var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+    hs.src = ('//s10.histats.com/js15_as.js');
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+    })();</script>
+
+    <script>
+        /* =========================================
+           1. WEB AUDIO API ENGINE
+        ========================================= */
+        let actx;
+        let isAudioMuted = true; // Start muted to comply with auto-play policies
+
+        function initAudio() {
+            if (!actx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                actx = new AudioContext();
+            }
+            if (actx.state === 'suspended') actx.resume();
+        }
+
+        // Initialize audio on first user interaction anywhere
+        document.body.addEventListener('click', initAudio, { once: true });
+        document.body.addEventListener('touchstart', initAudio, { once: true });
+
+        function toggleAudio() {
+            initAudio();
+            isAudioMuted = !isAudioMuted;
+            const icon = document.querySelector('#audio-toggle i');
+            if (isAudioMuted) {
+                icon.className = 'fa-solid fa-volume-xmark text-gray-500';
+            } else {
+                icon.className = 'fa-solid fa-volume-high text-cyber-cyan shadow-neon-cyan';
+                playSuccessSound(); // Test sound
+            }
+        }
+
+        function playSynth(freq, type, duration, vol) {
+            if (isAudioMuted || !actx) return;
+            const osc = actx.createOscillator();
+            const gain = actx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, actx.currentTime);
+            gain.gain.setValueAtTime(vol, actx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, actx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(actx.destination);
+            osc.start();
+            osc.stop(actx.currentTime + duration);
+        }
+
+        function playHoverSound() { playSynth(600, 'sine', 0.1, 0.05); }
+        function playClickSound() { playSynth(1200, 'square', 0.1, 0.05); }
+        function playTypeSound() { playSynth(Math.random() * 200 + 400, 'square', 0.05, 0.02); }
+        function playSuccessSound() { 
+            playSynth(523.25, 'sine', 0.2, 0.1); // C5
+            setTimeout(() => playSynth(659.25, 'sine', 0.3, 0.1), 100); // E5
+            setTimeout(() => playSynth(783.99, 'sine', 0.5, 0.1), 200); // G5
+        }
+        function playAlertSound() {
+            playSynth(300, 'sawtooth', 0.5, 0.1);
+        }
+
+        /* =========================================
+           2. WEBGL / CANVAS PARTICLES (Lightweight)
+        ========================================= */
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('touchmove', (e) => { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                // Cyan or Magenta
+                this.color = Math.random() > 0.5 ? 'rgba(0, 243, 255, 0.5)' : 'rgba(255, 0, 85, 0.5)';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+                // Mouse interaction
+                if (mouse.x && mouse.y) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        this.x -= dx * 0.05;
+                        this.y -= dy * 0.05;
+                    }
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            let particleCount = (window.innerWidth < 768) ? 40 : 100;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        initParticles();
+        animateParticles();
+
+        /* =========================================
+           3. DYNAMIC GEO-IP & SCARCITY
+        ========================================= */
+        async function fetchGeoIP() {
+            try {
+                let response = await fetch('https://ipapi.co/json/');
+                let data = await response.json();
+                let region = data.city || data.country_name || "Your Region";
+                document.getElementById('scarcity-banner').innerHTML = `⚠️ HIGH DEMAND: Only 3 VIP Passes remaining for users in <span class="text-black bg-cyber-gold px-1 rounded mx-1">${region.toUpperCase()}</span> today!`;
+            } catch (e) {
+                document.getElementById('scarcity-banner').innerHTML = `⚠️ HIGH DEMAND: Only 3 VIP Passes remaining today!`;
+            }
+        }
+        fetchGeoIP();
+
+        /* =========================================
+           4. GAME DIRECTORY GENERATION
+        ========================================= */
+        const games = [
+            { name: "Fire Kirin", tag: "🔥 2 Passes Left", color: "text-cyber-pink" },
+            { name: "Orion Stars", tag: "⚡ 99% Match", color: "text-cyber-cyan" },
+            { name: "Juwa 777", tag: "💎 High Value", color: "text-blue-400" },
+            { name: "Game Vault", tag: "🟢 Verified", color: "text-green-400" },
+            { name: "Golden Dragon", tag: "🔒 VIP Only", color: "text-cyber-gold" },
+            { name: "Ultra Monster", tag: "🌟 Trending", color: "text-purple-400" },
+            { name: "Vblink", tag: "🚀 Instant Code", color: "text-cyber-pink" },
+            { name: "Panda Master", tag: "🎁 Bonus Ready", color: "text-cyber-cyan" },
+            { name: "Cash Machine", tag: "💵 Active", color: "text-green-400" },
+            { name: "Milky Ways", tag: "✨ New Pool", color: "text-blue-400" },
+            { name: "Gameroom", tag: "👑 Master Pass", color: "text-cyber-gold" },
+            { name: "Casino Night", tag: "🏆 Top Rated", color: "text-cyber-cyan" }
+        ];
+
+        const gameGrid = document.getElementById('game-grid');
+        games.forEach((game, index) => {
+            const card = document.createElement('div');
+            card.className = "game-card glass-panel rounded-xl overflow-hidden cursor-pointer relative group flex flex-col items-center justify-center p-6 min-h-[160px]";
+            card.onclick = () => openModal(game.name, index);
+            card.onmouseenter = () => playHoverSound();
+            
+            // 3D Tilt Effect on mousemove
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+
+            card.innerHTML = `
+                <div class="absolute top-2 right-2 text-[10px] font-bold px-2 py-1 rounded bg-black/50 border border-gray-600 ${game.color} z-10 backdrop-blur">
+                    ${game.tag}
+                </div>
+                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-gray-800 to-black border-2 border-gray-600 group-hover:border-cyber-cyan mb-3 flex items-center justify-center shadow-inner transition-colors relative">
+                    <i class="fa-solid fa-gamepad text-2xl text-gray-400 group-hover:text-white group-hover:shadow-neon-cyan transition-colors"></i>
+                    <div class="absolute inset-0 rounded-full bg-cyber-cyan/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <h3 class="font-bold text-center text-sm md:text-base z-10">${game.name}</h3>
+                
+                <!-- Hover Reveal CTA -->
+                <div class="absolute inset-0 bg-cyber-cyan/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                    <span class="text-black font-bold uppercase tracking-wider text-sm"><i class="fa-solid fa-bolt"></i> Claim Pass</span>
+                </div>
+            `;
+            gameGrid.appendChild(card);
+        });
+
+        /* =========================================
+           5. SOCIAL PROOF & LIVE CHAT
+        ========================================= */
+        const names = ["Alex_99", "GamerX", "SarahW", "MikeDrop", "KirinKing", "Lucky777", "DavidB", "JohnDoe", "AlphaWolf"];
+        const messages = [
+            "Just unlocked Fire Kirin, code worked instantly! 🔥",
+            "Is the verification hard?",
+            "Nah it took me 1 min to download the app.",
+            "Thanks admin! Got my 2500 credits.",
+            "Juwa 777 passes still available?",
+            "Yes just got mine",
+            "This is actually legit wtf"
+        ];
+
+        // Toast logic
+        setInterval(() => {
+            if(Math.random() > 0.5) {
+                const toast = document.getElementById('toast');
+                document.getElementById('toast-msg').innerText = `${names[Math.floor(Math.random()*names.length)]} unlocked VIP Pass!`;
+                toast.style.transform = 'translateY(0)';
+                toast.style.opacity = '1';
+                setTimeout(() => {
+                    toast.style.transform = 'translateY(20px)';
+                    toast.style.opacity = '0';
+                }, 4000);
+            }
+        }, 8000);
+
+        // Chat logic
+        function toggleChat() {
+            const body = document.getElementById('chat-body');
+            const icon = document.getElementById('chat-icon');
+            if(body.style.display === 'none') {
+                body.style.display = 'flex';
+                icon.className = 'fa-solid fa-chevron-down text-xs';
+            } else {
+                body.style.display = 'none';
+                icon.className = 'fa-solid fa-chevron-up text-xs';
+            }
+        }
+        setInterval(() => {
+            const chatBody = document.getElementById('chat-body');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'animate-fade-in';
+            msgDiv.innerHTML = `<span class="text-cyber-cyan font-bold">${names[Math.floor(Math.random()*names.length)]}:</span> <span class="text-gray-300">${messages[Math.floor(Math.random()*messages.length)]}</span>`;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, 12000);
+
+
+        /* =========================================
+           6. THE APEX FUNNEL LOGIC
+        ========================================= */
+        let selectedPlatform = '';
+        let currentPrefix = '';
+
+        function openModal(gameName, index) {
+            playClickSound();
+            initAudio(); // Ensure audio context is alive
+            document.getElementById('funnel-modal').style.display = 'flex';
+            document.getElementById('selected-game').innerText = gameName;
+            
+            // Set fake voucher prefix based on game
+            currentPrefix = gameName.split(' ').map(w => w[0]).join('').toUpperCase() + "26-" + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('voucher-prefix').innerText = currentPrefix;
+
+            // Reset funnel
+            document.querySelectorAll('#funnel-modal > div > div > div[id^="step-"]').forEach(el => el.classList.add('hide-step'));
+            document.getElementById('step-1').classList.remove('hide-step');
+            document.getElementById('username-input').value = '';
+            document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('border-cyber-cyan', 'text-cyber-cyan'));
+            selectedPlatform = '';
+            
+            // Reset Scratch card
+            initScratchCard();
+        }
+
+        function closeModal() {
+            document.getElementById('funnel-modal').style.display = 'none';
+        }
+
+        function generateGuestID() {
+            playTypeSound();
+            document.getElementById('username-input').value = 'Guest_' + Math.floor(10000 + Math.random() * 90000);
+        }
+
+        function selectPlatform(btn, platform) {
+            playHoverSound();
+            document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('border-cyber-cyan', 'text-cyber-cyan'));
+            btn.classList.add('border-cyber-cyan', 'text-cyber-cyan');
+            selectedPlatform = platform;
+        }
+
+        function nextStep(step) {
+            playClickSound();
+            if (step === 2) {
+                if (!document.getElementById('username-input').value || !selectedPlatform) {
+                    alert("Please enter ID and select platform.");
+                    return;
+                }
+                switchStep(1, 2);
+            }
+        }
+
+        function switchStep(from, to) {
+            document.getElementById(`step-${from}`).classList.add('hide-step');
+            document.getElementById(`step-${to}`).classList.remove('hide-step');
+            
+            if (to === 3) runTerminalSync();
+            if (to === 4) startCountdown();
+        }
+
+        /* --- Scratch Card Logic (Step 2) --- */
+        let isDragging = false;
+        let scratchPercent = 0;
+        let scratchRevealed = false;
+
+        function initScratchCard() {
+            const sc = document.getElementById('scratch-canvas');
+            const container = document.getElementById('scratch-container');
+            // Set canvas size to match container layout explicitly
+            sc.width = 300; 
+            sc.height = 150;
+            const sctx = sc.getContext('2d');
+            
+            // Fill with silver coating
+            sctx.globalCompositeOperation = 'source-over';
+            sctx.fillStyle = '#b3b3b3'; // Silver base
+            sctx.fillRect(0, 0, sc.width, sc.height);
+            
+            // Add texture pattern
+            sctx.fillStyle = 'rgba(255,255,255,0.2)';
+            for(let i=0; i<100; i++) {
+                sctx.beginPath();
+                sctx.arc(Math.random()*sc.width, Math.random()*sc.height, Math.random()*3, 0, Math.PI*2);
+                sctx.fill();
+            }
+            // Add text hint
+            sctx.fillStyle = '#666';
+            sctx.font = '20px Rajdhani';
+            sctx.textAlign = 'center';
+            sctx.fillText('SCRATCH HERE', sc.width/2, sc.height/2 + 7);
+
+            scratchRevealed = false;
+            document.getElementById('scratch-percent').innerText = "0% Unlocked";
+
+            // Events
+            sc.onmousedown = (e) => { isDragging = true; scratch(e, sc, sctx); };
+            sc.onmousemove = (e) => { if (isDragging) scratch(e, sc, sctx); };
+            sc.onmouseup = () => { isDragging = false; checkScratchComplete(sctx, sc); };
+            sc.onmouseleave = () => { isDragging = false; checkScratchComplete(sctx, sc); };
+            
+            // Touch support
+            sc.addEventListener('touchstart', (e) => { isDragging = true; scratch(e, sc, sctx, true); e.preventDefault(); }, {passive: false});
+            sc.addEventListener('touchmove', (e) => { if(isDragging) scratch(e, sc, sctx, true); e.preventDefault(); }, {passive: false});
+            sc.addEventListener('touchend', () => { isDragging = false; checkScratchComplete(sctx, sc); });
+        }
+
+        function scratch(e, sc, sctx, isTouch = false) {
+            const rect = sc.getBoundingClientRect();
+            // Calculate scale ratio because CSS size might differ from canvas native size
+            const scaleX = sc.width / rect.width;
+            const scaleY = sc.height / rect.height;
+
+            let clientX = isTouch ? e.touches[0].clientX : e.clientX;
+            let clientY = isTouch ? e.touches[0].clientY : e.clientY;
+            
+            const x = (clientX - rect.left) * scaleX;
+            const y = (clientY - rect.top) * scaleY;
+
+            sctx.globalCompositeOperation = 'destination-out';
+            sctx.beginPath();
+            sctx.arc(x, y, 20, 0, Math.PI * 2);
+            sctx.fill();
+            
+            // Play scratch noise periodically
+            if(Math.random() > 0.8) playTypeSound(); 
+        }
+
+        function checkScratchComplete(sctx, sc) {
+            if (scratchRevealed) return;
+            const pixels = sctx.getImageData(0, 0, sc.width, sc.height).data;
+            let clearPixels = 0;
+            const totalPixels = pixels.length / 4;
+            
+            // Check alpha channel
+            for (let i = 3; i < pixels.length; i += 4) {
+                if (pixels[i] === 0) clearPixels++;
+            }
+            
+            let percent = Math.round((clearPixels / totalPixels) * 100);
+            document.getElementById('scratch-percent').innerText = `${percent}% Unlocked`;
+
+            if (percent > 40) { // Threshold
+                scratchRevealed = true;
+                // Auto clear rest
+                sctx.clearRect(0,0, sc.width, sc.height);
+                document.getElementById('scratch-percent').innerText = "100% Unlocked - SUCCESS!";
+                document.getElementById('scratch-percent').classList.add('text-green-500');
+                playSuccessSound();
+                
+                setTimeout(() => {
+                    switchStep(2, 3);
+                }, 1500);
+            }
+        }
+
+        /* --- Terminal Sync (Step 3) --- */
+        async function runTerminalSync() {
+            const out = document.getElementById('terminal-output');
+            out.innerHTML = '';
+            
+            const lines = [
+                "> INITIATING SECURE HANDSHAKE...",
+                `> TARGET: ${document.getElementById('selected-game').innerText} SERVER [${selectedPlatform}]`,
+                `> USER_ID: ${document.getElementById('username-input').value}`,
+                "> BYPASSING SECURITY PROTOCOLS...",
+                "> [OK] FIREWALL BREACHED",
+                "> SEARCHING INVENTORY DB...",
+                "> [OK] FOUND 1 MATCHING VIP VOUCHER",
+                "> ALLOCATING TO SESSION IP...",
+                "> ENCRYPTING DATA..."
+            ];
+
+            for(let i=0; i<lines.length; i++) {
+                await typeLine(lines[i], out);
+                await new Promise(r => setTimeout(r, 400 + Math.random()*400));
+            }
+            
+            out.innerHTML += "\n<span class='text-cyber-cyan'>STATUS: VOUCHER RESERVED SUCESSFULLY!</span>";
+            playSuccessSound();
+            
+            setTimeout(() => {
+                switchStep(3, 4);
+            }, 1500);
+        }
+
+        function typeLine(text, el) {
+            return new Promise(resolve => {
+                let i = 0;
+                el.innerHTML += "\n";
+                let typeInterval = setInterval(() => {
+                    el.innerHTML += text.charAt(i);
+                    playTypeSound();
+                    i++;
+                    if (i >= text.length) {
+                        clearInterval(typeInterval);
+                        resolve();
+                    }
+                }, 30);
+            });
+        }
+
+        /* --- Code Teaser & Verification (Step 4 & 5) --- */
+        let timerInterval;
+        function startCountdown() {
+            clearInterval(timerInterval);
+            let duration = 5 * 60; // 5 mins
+            const display = document.getElementById('countdown');
+            
+            timerInterval = setInterval(() => {
+                let m = Math.floor(duration / 60);
+                let s = duration % 60;
+                display.innerText = (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s);
+                if (--duration < 0) {
+                    clearInterval(timerInterval);
+                    display.innerText = "EXPIRED";
+                    display.classList.replace('text-cyber-pink', 'text-red-500');
+                }
+            }, 1000);
+
+            // Smart AdBlock Check
+            setTimeout(() => {
+                if (typeof _gu !== 'function') {
+                    document.getElementById('adblock-warning').classList.remove('hidden');
+                }
+            }, 1500);
+        }
+
+        function triggerLocker() {
+            playClickSound();
+            if (typeof _gu === 'function') {
+                _gu(); // Call AdBlueMedia locker function
+            } else {
+                // Fallback action if blocked
+                alert("Security check failed to load. Please disable AdBlocker or try another browser.");
+                document.getElementById('adblock-warning').classList.remove('hidden');
+            }
+        }
+
+
+        /* =========================================
+           7. EXIT-INTENT & TAB RECOVERY ENGINE
+        ========================================= */
+        let hasTriggeredExit = false;
+        
+        // Desktop Mouse Leave (Exit Intent)
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 10 && !hasTriggeredExit && document.getElementById('funnel-modal').style.display !== 'flex') {
+                hasTriggeredExit = true;
+                document.getElementById('exit-modal').style.display = 'flex';
+                playAlertSound();
+            }
+        });
+
+        function closeExitModal() {
+            playClickSound();
+            document.getElementById('exit-modal').style.display = 'none';
+        }
+
+        // Tab Switch Protection
+        let originalTitle = document.title;
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                document.title = "⚠️ (1) UNCLAIMED CODE EXPIRING!";
+                // Note: Most modern browsers block audio on hidden tabs unless highly trusted,
+                // but if allowed by interaction, this plays a soft ping.
+                playAlertSound(); 
+            } else {
+                document.title = originalTitle;
+            }
+        });
+
+    </script>
+</body>
+</html>
